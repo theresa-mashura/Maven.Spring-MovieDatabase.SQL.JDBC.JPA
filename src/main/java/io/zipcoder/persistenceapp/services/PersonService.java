@@ -20,12 +20,16 @@ public class PersonService {
         return this.personRepository.save(person);
     }
 
-    public void deletePerson(Person person) {
-        this.personRepository.delete(person);
+    public void deletePerson(Long id) {
+        this.personRepository.delete(id);
     }
 
     public void deletePeople(List<Person> people) {
         this.personRepository.deleteInBatch(people);
+    }
+
+    public List<Person> findAllPeople() {
+        return this.personRepository.findAll();
     }
 
     public Person findPerson(Long id) {
@@ -53,6 +57,10 @@ public class PersonService {
         return this.personRepository.findByBirthday(birthday);
     }
 
+    public List<Person> findPersonByMobileNumber(String mobile) {
+        return this.personRepository.findByMobile(mobile);
+    }
+
     public Map<String, List<Person>> getMapLastNamesToPeopleList() {
         List<Person> people = this.personRepository.findAll();
         HashMap<String, List<Person>> map = new HashMap<>();
@@ -78,6 +86,7 @@ public class PersonService {
                 map.put(p.getFirstName(), 1);
             }
         }
+        return map;
     }
 
 

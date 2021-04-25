@@ -1,15 +1,15 @@
 package io.zipcoder.persistenceapp.models;
 
-import org.springframework.data.annotation.Id;
-
+import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 public class Home {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String address;
     private String homenumber;
