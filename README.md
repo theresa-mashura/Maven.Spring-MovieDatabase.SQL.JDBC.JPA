@@ -88,7 +88,7 @@ Add the following homes to the 'HOME' table
 | 234 High Street, PA 19159 | 267-3940 |
 
 
-_You may use the query in the 'data-h2.sql' file to populate the 'PERSON' and 'HOME' table_
+_You may use the query in the 'data.sql' file to populate the 'PERSON' and 'HOME' table_
 
 
 Support the following operations:

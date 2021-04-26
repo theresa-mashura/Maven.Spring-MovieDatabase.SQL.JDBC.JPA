@@ -4,6 +4,7 @@ import io.zipcoder.persistenceapp.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -25,7 +26,7 @@ public class PersonService {
     }
 
     public void deletePeople(List<Person> people) {
-        this.personRepository.deleteInBatch(people);
+        this.personRepository.delete(people);
     }
 
     public List<Person> findAllPeople() {
@@ -46,19 +47,15 @@ public class PersonService {
     }
 
     public List<Person> findPersonByFirstName(String firstName) {
-        return this.personRepository.findByFirstName(firstName);
+        return this.personRepository.findAllByFirstName(firstName);
     }
 
     public List<Person> findPersonByLastName(String lastName) {
-        return this.personRepository.findByLastName(lastName);
-    }
-
-    public List<Person> findPersonByBirthday(Date birthday) {
-        return this.personRepository.findByBirthday(birthday);
+        return this.personRepository.findAllByLastName(lastName);
     }
 
     public List<Person> findPersonByMobileNumber(String mobile) {
-        return this.personRepository.findByMobile(mobile);
+        return this.personRepository.findAllByMobile(mobile);
     }
 
     public Map<String, List<Person>> getMapLastNamesToPeopleList() {

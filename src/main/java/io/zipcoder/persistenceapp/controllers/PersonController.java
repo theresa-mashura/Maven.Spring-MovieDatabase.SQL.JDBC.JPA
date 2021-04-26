@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/people", method = RequestMethod.POST)
-    public ResponseEntity<Person> createPerson(Person person) {
+    public ResponseEntity<Person> createPerson(@RequestBody Person person) {
         return new ResponseEntity<>(this.personService.insertPerson(person), HttpStatus.CREATED);
     }
 
@@ -53,7 +54,7 @@ public class PersonController {
 
     @RequestMapping(value = "/people/surname/{lastName}", method = RequestMethod.GET)
     public ResponseEntity<List<Person>> findPeopleWithLastName(@PathVariable String lastName) {
-        return new ResponseEntity<>(this.personService.findPersonByFirstName(lastName), HttpStatus.OK);
+        return new ResponseEntity<>(this.personService.findPersonByLastName(lastName), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/people/surname", method = RequestMethod.GET)
@@ -61,9 +62,20 @@ public class PersonController {
         return new ResponseEntity<>(this.personService.getMapLastNamesToPeopleList(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/people/firstname/stats" method = RequestMethod.GET)
+    @RequestMapping(value = "/people/firstname/stats", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Integer>> getFirstNamesReport() {
         return new ResponseEntity<>(this.personService.getMapFirstNamesToOccurrences(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/people/firstname/{firstName}", method = RequestMethod.GET)
+    public ResponseEntity<List<Person>> findPersonByFirstName(@PathVariable String firstName) {
+        return new ResponseEntity<>(this.personService.findPersonByFirstName(firstName), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/people/delete-list", method = RequestMethod.DELETE)
+    public ResponseEntity<List<Person>> deleteManyPeople(@RequestBody List<Person> people) {
+        this.personService.deletePeople(people);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

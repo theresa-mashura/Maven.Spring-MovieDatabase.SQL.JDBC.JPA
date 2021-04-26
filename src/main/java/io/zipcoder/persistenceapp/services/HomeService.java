@@ -37,9 +37,9 @@ public class HomeService {
     }
 
     // FIND A HOME BY A PERSON ID
-    public Long findHomeByPersonId(Long id) {
-        return this.homeRepository.findByPersonId(id);
-    }
+//    public Long findHomeByPersonId(Long id) {
+//        return this.homeRepository.findByPersonId(id);
+//    }
 
     // ADD A PERSON TO A HOME
 

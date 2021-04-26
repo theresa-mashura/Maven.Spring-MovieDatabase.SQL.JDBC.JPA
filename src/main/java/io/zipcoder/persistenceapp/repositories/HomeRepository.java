@@ -13,6 +13,6 @@ public interface HomeRepository extends JpaRepository<Home, Long> {
     Home findByHomenumber(String homenumber);
     Home findByAddress(String address);
 
-    @Query(value = "SELECT p.homeId FROM Person p INNER JOIN Home h WHERE p.id = :id")
-    Long findByPersonId(@Param("id") Long id);
+    //@Query(value = "SELECT p.homeId FROM Person p INNER JOIN Home h WHERE p.id = :id")
+    //Long findByPersonId(@Param("id") Long id);
 }

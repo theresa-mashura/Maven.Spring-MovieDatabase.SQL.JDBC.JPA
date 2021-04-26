@@ -1,15 +1,14 @@
 package io.zipcoder.persistenceapp.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "PERSON")
 public class Person {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private Long homeId;
     private String firstName;
@@ -20,11 +19,12 @@ public class Person {
     public Person() {
     }
 
-    public Person(Long id, Long homeId, String firstName, String lastName, String mobile) {
+    public Person(Long id, Long homeId, String firstName, String lastName, Date birthday, String mobile) {
         this.id = id;
         this.homeId = homeId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.birthday = birthday;
         this.mobile = mobile;
     }
 
