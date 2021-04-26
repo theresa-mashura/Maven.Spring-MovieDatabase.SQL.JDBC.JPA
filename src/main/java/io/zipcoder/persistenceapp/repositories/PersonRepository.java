@@ -14,4 +14,5 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     List<Person> findAllByLastName(String lastName);
     List<Person> findAllByBirthday(Date birthday);
     List<Person> findAllByMobile(String mobile);
+    List<Person> findAllByHomeId(Long homeId);
 }

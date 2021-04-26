@@ -1,4 +1,5 @@
 package io.zipcoder.persistenceapp.services;
+import io.zipcoder.persistenceapp.models.Home;
 import io.zipcoder.persistenceapp.models.Person;
 import io.zipcoder.persistenceapp.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,12 @@ public class PersonService {
     @Autowired
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
+    }
+
+    public Person addPersonToHome(Long homeId, Long personId) {
+        Person p = this.personRepository.getOne(personId);
+        p.setHomeId(homeId);
+        return this.personRepository.save(p);
     }
 
     public Person insertPerson(Person person) {
@@ -86,5 +93,12 @@ public class PersonService {
         return map;
     }
 
+    public Long findHomeByPersonId(Long personId) {
+        Person p = this.personRepository.getOne(personId);
+        return p.getHomeId();
+    }
 
+    public List<Person> getListPeopleInAHome(Long homeId) {
+        return this.personRepository.findAllByHomeId(homeId);
+    }
 }

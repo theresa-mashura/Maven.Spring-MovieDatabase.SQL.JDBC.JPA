@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -76,6 +75,21 @@ public class PersonController {
     public ResponseEntity<List<Person>> deleteManyPeople(@RequestBody List<Person> people) {
         this.personService.deletePeople(people);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(value = "/people/{personId}/home/{homeId}", method = RequestMethod.PUT)
+    public ResponseEntity<Person> addPersonToAHome(@PathVariable Long personId, @PathVariable Long homeId) {
+        return new ResponseEntity<>(this.personService.addPersonToHome(homeId, personId), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/people/{personId}/home", method = RequestMethod.GET)
+    public ResponseEntity<Long> findHomeByPerson(@PathVariable Long personId) {
+        return new ResponseEntity<>(this.personService.findHomeByPersonId(personId), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/people/all/home/{homeId}", method = RequestMethod.GET)
+    public ResponseEntity<List<Person>> findPeopleInAHome(@PathVariable Long homeId) {
+        return new ResponseEntity<>(this.personService.getListPeopleInAHome(homeId), HttpStatus.OK);
     }
 
 }

@@ -4,6 +4,8 @@ import io.zipcoder.persistenceapp.models.Home;
 import io.zipcoder.persistenceapp.repositories.HomeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HomeService {
 
@@ -13,8 +15,20 @@ public class HomeService {
         this.homeRepository = homeRepository;
     }
 
+    public List<Home> findAllHomes() {
+        return this.homeRepository.findAll();
+    }
+
     public Home insertHome(Home home) {
         return this.homeRepository.save(home);
+    }
+
+    public void removeHome(Long id) {
+        this.homeRepository.delete(id);
+    }
+
+    public void removeHomes(List<Home> homes) {
+        this.homeRepository.delete(homes);
     }
 
     public Home updateHome(Home home) {
@@ -35,14 +49,5 @@ public class HomeService {
     public Home findHomeByAddress(String address) {
         return this.homeRepository.findByAddress(address);
     }
-
-    // FIND A HOME BY A PERSON ID
-//    public Long findHomeByPersonId(Long id) {
-//        return this.homeRepository.findByPersonId(id);
-//    }
-
-    // ADD A PERSON TO A HOME
-
-    // GENERATE LIST OF PEOPLE THAT LIVE IN A HOME
 
 }
